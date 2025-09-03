@@ -14,9 +14,8 @@ export function MarketPage() {
   const isAuthenticated = !!user;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-white pt-16">
       <NavigationHeader isAuthenticated={isAuthenticated} />
-      <div className="pt-16">
         <Header />
         <HeroWithSidebar />
         <CategoryGrid />
@@ -32,7 +31,6 @@ export function MarketPage() {
           subtitle="Stay ahead of the curve with these popular items that everyone is talking about."
         />
         <Cart />
-      </div>
       <FooterSection />
     </div>
   );
@@ -69,7 +67,7 @@ function CategorySidebar() {
   ];
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+    <div className="bg-white rounded-2xl shadow-lg border border-primary-100 overflow-hidden">
       <div className="bg-gradient-to-r from-primary-600 to-primary-700 px-6 py-4">
         <h3 className="text-lg font-bold text-white flex items-center">
           <span className="mr-2">🏷️</span>
@@ -109,28 +107,12 @@ function CategorySidebar() {
         ))}
       </div>
       
-      <div className="bg-gradient-to-r from-red-50 to-red-100 p-4 border-t border-red-200">
+      <div className="bg-gradient-to-r from-primary-50 to-primary-100 p-4 border-t border-primary-200">
         <div className="text-center">
-          <p className="text-sm font-medium text-red-800 mb-2">🔥 Special Offers</p>
-          <p className="text-xs text-red-600">Up to 50% off on selected items</p>
+          <p className="text-sm font-medium text-primary-800 mb-2">🔥 Special Offers</p>
+          <p className="text-xs text-primary-600">Up to 50% off on selected items</p>
         </div>
       </div>
-    </div>
-  );
-}
-      <HeroSlider />
-      <CategoryGrid />
-      <ProductGrid
-        products={featuredProducts}
-        title="Featured Products"
-        subtitle="Discover our hand-picked selection of premium products that define quality and style."
-      />
-      <PromoBanner />
-      <ProductGrid
-        products={trendingProducts}
-        title="Trending Now"
-        subtitle="Stay ahead of the curve with these popular items that everyone is talking about."
-      />
     </div>
   );
 }

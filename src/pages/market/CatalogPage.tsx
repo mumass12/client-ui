@@ -93,9 +93,8 @@ export function CatalogPage() {
   const brands = Array.from(new Set(products.map((p) => p.brand)));
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-white pt-16">
       <NavigationHeader isAuthenticated={isAuthenticated} />
-      <div className="pt-16">
         <Header />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
@@ -262,7 +261,6 @@ export function CatalogPage() {
         </div>
       </div>
         <Cart />
-      </div>
       <FooterSection />
     </div>
   );

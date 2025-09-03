@@ -43,14 +43,20 @@ export function Cart() {
         {state.cart.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-96 text-gray-500 px-6">
             <div className="w-24 h-24 bg-primary-100 rounded-full flex items-center justify-center mb-6">
-          <div className="border-t bg-gradient-to-r from-primary-50 to-primary-100/50 p-6 space-y-6">
+              <ShoppingBag className="w-12 h-12 text-primary-400" />
             </div>
-            <p className="text-xl font-semibold mb-3 text-primary-700">
-              <span className="text-primary-600">₦{(total * 1500).toLocaleString()}</span>
-            </p>
-            <button className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+            <h3 className="text-xl font-semibold mb-3 text-primary-700">
+              Your cart is empty
+            </h3>
+            <p className="text-primary-600 mb-6 text-center">
               Add some amazing products to get started on your shopping journey
             </p>
+            <Link
+              to="/catalog"
+              className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg"
+            >
+              Start Shopping
+            </Link>
           </div>
         ) : (
           <>
@@ -108,14 +114,17 @@ export function Cart() {
               ))}
             </div>
 
-            <div className="border-t bg-gradient-to-r from-gray-50 to-primary-50/30 p-6 space-y-6">
+            <div className="border-t bg-gradient-to-r from-primary-50 to-primary-100/50 p-6 space-y-6">
               <div className="flex justify-between text-2xl font-bold">
                 <span>Total</span>
-                <span className="text-primary-600">${total.toFixed(2)}</span>
+                <span className="text-primary-600">₦{(total * 1500).toLocaleString()}</span>
               </div>
-              <button className="w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-green-glow">
+              <Link
+                to="/checkout"
+                className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl text-center block"
+              >
                 Checkout
-              </button>
+              </Link>
             </div>
           </>
         )}

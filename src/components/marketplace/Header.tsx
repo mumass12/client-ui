@@ -18,7 +18,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/market-place" className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-110">
               <span className="text-white font-bold text-xl">M</span>
             </div>
@@ -67,17 +67,20 @@ export function Header() {
 
           {/* Actions */}
           <div className="flex items-center space-x-2">
-            <button className="p-3 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-all duration-300 hover:scale-105 shadow-sm hover:shadow-md">
+            <Link
+              to="/account"
+              className="p-3 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-all duration-300 hover:scale-105 shadow-sm hover:shadow-md"
+            >
               <User className="w-5 h-5" />
-            </button>
+            </Link>
 
             <Link
               to="/wishlist"
-              className="p-3 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all duration-300 relative group hover:scale-105 shadow-sm hover:shadow-md"
+              className="p-3 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-all duration-300 relative group hover:scale-105 shadow-sm hover:shadow-md"
             >
               <Heart className="w-5 h-5" />
               {wishlistCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse shadow-lg">
+                <span className="absolute -top-1 -right-1 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse shadow-lg">
                   {wishlistCount}
                 </span>
               )}
