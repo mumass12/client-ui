@@ -1,9 +1,14 @@
 import { useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Filter, SlidersHorizontal } from "lucide-react";
+import NavigationHeader from "../../components/navigation/NavigationHeader";
+import FooterSection from "../../components/layouts/FooterSection";
+import { Header } from "../../components/marketplace/Header";
+import { useUser } from "../../context/UserContext";
 import { ProductCard } from "../../components/marketplace/ProductCard";
 import { products, categories } from "../../data/products";
 import { FilterOptions } from "../../types";
+import { Cart } from "../../components/marketplace/Cart";
 
 const sortOptions = [
   { value: "relevance", label: "Relevance" },
@@ -14,6 +19,8 @@ const sortOptions = [
 ];
 
 export function CatalogPage() {
+  const { user } = useUser();
+  const isAuthenticated = !!user;
   const [searchParams] = useSearchParams();
   const [showFilters, setShowFilters] = useState(false);
   const [sortBy, setSortBy] = useState("relevance");
@@ -86,15 +93,18 @@ export function CatalogPage() {
   const brands = Array.from(new Set(products.map((p) => p.brand)));
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-primary-50/20">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-white">
+      <NavigationHeader isAuthenticated={isAuthenticated} />
+      <div className="pt-16">
+        <Header />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-3 animate-slide-up">
+            <h1 className="text-4xl font-bold text-primary-900 mb-3 animate-slide-up">
               Product Catalog
             </h1>
-            <p className="text-lg text-gray-600 animate-slide-up">
+            <p className="text-lg text-primary-700 animate-slide-up">
               Showing {filteredProducts.length} products
             </p>
           </div>
@@ -102,7 +112,7 @@ export function CatalogPage() {
           <div className="flex items-center space-x-4 mt-4 lg:mt-0">
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="flex items-center space-x-2 px-6 py-3 border-2 border-primary-300 text-primary-600 rounded-xl hover:bg-primary-50 transition-all duration-300 lg:hidden hover:scale-105 font-semibold"
+              className="flex items-center space-x-2 px-6 py-3 border-2 border-primary-600 text-primary-600 rounded-xl hover:bg-primary-50 transition-all duration-300 lg:hidden hover:scale-105 font-semibold"
             >
               <SlidersHorizontal className="w-4 h-4" />
               <span>Filters</span>
@@ -111,7 +121,7 @@ export function CatalogPage() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-6 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 hover:border-primary-400 font-semibold"
+              className="px-6 py-3 border-2 border-primary-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 hover:border-primary-600 font-semibold"
             >
               {sortOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -127,10 +137,10 @@ export function CatalogPage() {
           <div
             className={`lg:w-64 ${showFilters ? "block" : "hidden lg:block"}`}
           >
-            <div className="bg-white rounded-2xl shadow-medium p-8 space-y-8 border border-gray-100">
+            <div className="bg-white rounded-2xl shadow-lg p-8 space-y-8 border border-primary-100">
               {/* Categories */}
               <div>
-                <h3 className="font-bold text-gray-900 mb-4 text-lg">
+                <h3 className="font-bold text-primary-900 mb-4 text-lg">
                   Categories
                 </h3>
                 <div className="space-y-3">
@@ -148,7 +158,7 @@ export function CatalogPage() {
                       <span className="ml-3 text-gray-700 group-hover:text-primary-600 transition-colors duration-300 font-medium">
                         {category.name}
                       </span>
-                      <span className="ml-auto text-sm text-gray-500 font-medium">
+                      <span className="ml-auto text-sm text-primary-500 font-medium">
                         ({category.productCount})
                       </span>
                     </label>
@@ -158,7 +168,7 @@ export function CatalogPage() {
 
               {/* Price Range */}
               <div>
-                <h3 className="font-bold text-gray-900 mb-4 text-lg">
+                <h3 className="font-bold text-primary-900 mb-4 text-lg">
                   Price Range
                 </h3>
                 <div className="space-y-4">
@@ -183,7 +193,7 @@ export function CatalogPage() {
 
               {/* Brands */}
               <div>
-                <h3 className="font-bold text-gray-900 mb-4 text-lg">Brands</h3>
+                <h3 className="font-bold text-primary-900 mb-4 text-lg">Brands</h3>
                 <div className="space-y-3">
                   {brands.map((brand) => (
                     <label
@@ -236,13 +246,13 @@ export function CatalogPage() {
 
             {filteredProducts.length === 0 && (
               <div className="text-center py-20">
-                <div className="w-32 h-32 bg-gradient-to-br from-gray-100 to-primary-100 rounded-full flex items-center justify-center mx-auto mb-8 animate-float">
+                <div className="w-32 h-32 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full flex items-center justify-center mx-auto mb-8 animate-float">
                   <Filter className="w-16 h-16 text-gray-400" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-2xl font-bold text-primary-900 mb-4">
                   No products found
                 </h3>
-                <p className="text-lg text-gray-600 max-w-md mx-auto leading-relaxed">
+                <p className="text-lg text-primary-600 max-w-md mx-auto leading-relaxed">
                   Try adjusting your filters or search terms to discover amazing
                   products
                 </p>
@@ -251,6 +261,9 @@ export function CatalogPage() {
           </div>
         </div>
       </div>
+        <Cart />
+      </div>
+      <FooterSection />
     </div>
   );
 }

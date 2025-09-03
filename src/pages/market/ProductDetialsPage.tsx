@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import NavigationHeader from "../../components/navigation/NavigationHeader";
+import FooterSection from "../../components/layouts/FooterSection";
+import { Header } from "../../components/marketplace/Header";
+import { useUser } from "../../context/UserContext";
 import {
   Star,
   Heart,
@@ -13,8 +17,11 @@ import {
 import { products } from "../../data/products";
 import { useApp } from "../../context/MarketContext";
 import { ProductGrid } from "../../components/marketplace/ProductGrid";
+import { Cart } from "../../components/marketplace/Cart";
 
 export function ProductDetailPage() {
+  const { user } = useUser();
+  const isAuthenticated = !!user;
   const { id } = useParams<{ id: string }>();
   const { state, dispatch } = useApp();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -27,18 +34,25 @@ export function ProductDetailPage() {
 
   if (!product) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-primary-50 to-white">
+        <NavigationHeader isAuthenticated={isAuthenticated} />
+        <div className="pt-16">
+          <Header />
+        <div className="flex items-center justify-center h-96">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+          <h1 className="text-2xl font-bold text-primary-900 mb-4">
             Product not found
           </h1>
           <Link
             to="/catalog"
-            className="text-emerald-600 hover:text-emerald-700"
+            className="text-primary-600 hover:text-primary-700 font-medium"
           >
             Return to catalog
           </Link>
         </div>
+        </div>
+        </div>
+        <FooterSection />
       </div>
     );
   }
@@ -79,7 +93,10 @@ export function ProductDetailPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-white">
+      <NavigationHeader isAuthenticated={isAuthenticated} />
+      <div className="pt-16">
+        <Header />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-8">
@@ -87,18 +104,18 @@ export function ProductDetailPage() {
             Home
           </Link>
           <span>/</span>
-          <Link to="/catalog" className="hover:text-emerald-600">
+          <Link to="/catalog" className="hover:text-primary-600">
             Shop
           </Link>
           <span>/</span>
           <Link
             to={`/catalog?category=${product.category}`}
-            className="hover:text-emerald-600"
+            className="hover:text-primary-600"
           >
             {product.category}
           </Link>
           <span>/</span>
-          <span className="text-gray-900">{product.name}</span>
+          <span className="text-primary-900 font-medium">{product.name}</span>
         </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
@@ -155,10 +172,10 @@ export function ProductDetailPage() {
           {/* Product Info */}
           <div className="space-y-6">
             <div>
-              <p className="text-emerald-600 font-medium mb-2">
+              <p className="text-primary-600 font-medium mb-2">
                 {product.brand}
               </p>
-              <h1 className="text-3xl font-bold text-gray-900 mb-4">
+              <h1 className="text-3xl font-bold text-primary-900 mb-4">
                 {product.name}
               </h1>
 
@@ -181,7 +198,7 @@ export function ProductDetailPage() {
               </div>
 
               <div className="flex items-center space-x-3 mb-6">
-                <span className="text-3xl font-bold text-gray-900">
+                <span className="text-3xl font-bold text-primary-900">
                   ${product.price}
                 </span>
                 {product.originalPrice && (
@@ -189,7 +206,7 @@ export function ProductDetailPage() {
                     <span className="text-xl text-gray-500 line-through">
                       ${product.originalPrice}
                     </span>
-                    <span className="bg-red-100 text-red-800 px-2 py-1 rounded text-sm font-medium">
+                    <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
                       Save ${product.originalPrice - product.price}
                     </span>
                   </>
@@ -200,7 +217,7 @@ export function ProductDetailPage() {
             {/* Options */}
             {product.colors && (
               <div>
-                <h3 className="text-sm font-medium text-gray-900 mb-3">
+                <h3 className="text-sm font-medium text-primary-900 mb-3">
                   Color
                 </h3>
                 <div className="flex space-x-2">
@@ -210,7 +227,7 @@ export function ProductDetailPage() {
                       onClick={() => setSelectedColor(color)}
                       className={`px-4 py-2 border rounded-md text-sm font-medium transition-colors ${
                         selectedColor === color
-                          ? "border-emerald-600 bg-emerald-50 text-emerald-700"
+                          ? "border-primary-600 bg-primary-50 text-primary-700"
                           : "border-gray-300 text-gray-700 hover:border-gray-400"
                       }`}
                     >
@@ -223,7 +240,7 @@ export function ProductDetailPage() {
 
             {product.sizes && (
               <div>
-                <h3 className="text-sm font-medium text-gray-900 mb-3">Size</h3>
+                <h3 className="text-sm font-medium text-primary-900 mb-3">Size</h3>
                 <div className="grid grid-cols-4 gap-2">
                   {product.sizes.map((size) => (
                     <button
@@ -231,7 +248,7 @@ export function ProductDetailPage() {
                       onClick={() => setSelectedSize(size)}
                       className={`py-2 border rounded-md text-sm font-medium transition-colors ${
                         selectedSize === size
-                          ? "border-emerald-600 bg-emerald-50 text-emerald-700"
+                          ? "border-primary-600 bg-primary-50 text-primary-700"
                           : "border-gray-300 text-gray-700 hover:border-gray-400"
                       }`}
                     >
@@ -244,7 +261,7 @@ export function ProductDetailPage() {
 
             {/* Quantity */}
             <div>
-              <h3 className="text-sm font-medium text-gray-900 mb-3">
+              <h3 className="text-sm font-medium text-primary-900 mb-3">
                 Quantity
               </h3>
               <div className="flex items-center space-x-3">
@@ -268,7 +285,7 @@ export function ProductDetailPage() {
             <div className="space-y-4">
               <button
                 onClick={handleAddToCart}
-                className="w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white py-4 px-6 rounded-xl font-bold transition-all duration-300 flex items-center justify-center space-x-2 hover:scale-105 hover:shadow-green-glow"
+                className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white py-4 px-6 rounded-xl font-bold transition-all duration-300 flex items-center justify-center space-x-2 hover:scale-105 shadow-lg"
               >
                 <ShoppingCart className="w-5 h-5" />
                 <span>Add to Cart</span>
@@ -278,8 +295,8 @@ export function ProductDetailPage() {
                 onClick={handleToggleWishlist}
                 className={`w-full border-2 py-4 px-6 rounded-xl font-bold transition-all duration-300 flex items-center justify-center space-x-2 hover:scale-105 ${
                   isInWishlist
-                    ? "border-accent-300 bg-accent-50 text-accent-700 hover:shadow-red-glow"
-                    : "border-gray-300 text-gray-700 hover:border-accent-400 hover:text-accent-600 hover:bg-accent-50"
+                    ? "border-red-300 bg-red-50 text-red-700 shadow-md"
+                    : "border-primary-300 text-primary-700 hover:border-red-400 hover:text-red-600 hover:bg-red-50"
                 }`}
               >
                 <Heart
@@ -295,7 +312,7 @@ export function ProductDetailPage() {
             <div className="border-t pt-6 space-y-3">
               <div className="flex items-center space-x-3 text-sm text-gray-600">
                 <Truck className="w-4 h-4" />
-                <span>Free shipping on orders over $99</span>
+                <span>Free shipping on orders over ₦50,000</span>
               </div>
               <div className="flex items-center space-x-3 text-sm text-gray-600">
                 <Shield className="w-4 h-4" />
@@ -317,10 +334,10 @@ export function ProductDetailPage() {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`py-3 px-4 border-b-2 font-semibold transition-all duration-300 hover:scale-105 ${
+                  className={`py-3 px-4 border-b-2 font-semibold transition-all duration-300 ${
                     activeTab === tab
                       ? "border-primary-600 text-primary-600"
-                      : "border-transparent text-gray-500 hover:text-primary-600 hover:border-primary-300"
+                      : "border-transparent text-gray-500 hover:text-primary-600"
                   }`}
                 >
                   {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -332,7 +349,7 @@ export function ProductDetailPage() {
           <div className="prose prose-gray max-w-none">
             {activeTab === "description" && (
               <div>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed text-lg">
                   {product.description}
                 </p>
               </div>
@@ -345,7 +362,7 @@ export function ProductDetailPage() {
                     key={key}
                     className="flex justify-between py-2 border-b border-gray-100"
                   >
-                    <span className="font-medium text-gray-900">{key}</span>
+                    <span className="font-medium text-primary-900">{key}</span>
                     <span className="text-gray-600">{value}</span>
                   </div>
                 ))}
@@ -355,7 +372,7 @@ export function ProductDetailPage() {
             {activeTab === "reviews" && (
               <div className="space-y-6">
                 <div className="flex items-center space-x-4">
-                  <div className="text-4xl font-bold text-gray-900">
+                  <div className="text-4xl font-bold text-primary-900">
                     {product.rating}
                   </div>
                   <div>
@@ -397,6 +414,9 @@ export function ProductDetailPage() {
           />
         )}
       </div>
+        <Cart />
+      </div>
+      <FooterSection />
     </div>
   );
 }

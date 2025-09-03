@@ -12,7 +12,7 @@ const slides = [
       "https://images.pexels.com/photos/934063/pexels-photo-934063.jpeg?auto=compress&cs=tinysrgb&w=1200",
     buttonText: "Shop Now",
     buttonLink: "/catalog?category=Fashion",
-    gradient: "from-green-600/70 to-green-900/50",
+    gradient: "from-primary-600/70 to-primary-900/50",
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const slides = [
       "https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?auto=compress&cs=tinysrgb&w=1200",
     buttonText: "Explore",
     buttonLink: "/catalog?category=Electronics",
-    gradient: "from-green-700/70 to-green-950/50",
+    gradient: "from-primary-700/70 to-primary-950/50",
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ const slides = [
       "https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=1200",
     buttonText: "Shop Home",
     buttonLink: "/catalog?category=Home",
-    gradient: "from-green-800/60 to-green-950/60",
+    gradient: "from-primary-800/60 to-primary-950/60",
   },
 ];
 
@@ -60,7 +60,7 @@ export function HeroSlider() {
   };
 
   return (
-    <div className="relative h-[500px] md:h-[650px] overflow-hidden rounded-b-3xl">
+    <div className="relative h-[400px] md:h-[500px] overflow-hidden rounded-2xl shadow-xl border border-primary-200">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
@@ -78,18 +78,18 @@ export function HeroSlider() {
             <div className="relative z-10 h-full flex items-center">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                 <div className="max-w-2xl">
-                  <p className="text-green-300 text-sm font-semibold mb-3 animate-fade-in tracking-wide uppercase">
+                  <p className="text-primary-300 text-sm font-semibold mb-3 animate-fade-in tracking-wide uppercase">
                     {slide.subtitle}
                   </p>
-                  <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight animate-fade-in-delay-1 tracking-tight">
+                  <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight animate-fade-in-delay-1 tracking-tight">
                     {slide.title}
                   </h1>
-                  <p className="text-xl text-gray-100 mb-10 leading-relaxed animate-fade-in-delay-2 max-w-lg">
+                  <p className="text-lg text-gray-100 mb-8 leading-relaxed animate-fade-in-delay-2 max-w-lg">
                     {slide.description}
                   </p>
                   <a
                     href={slide.buttonLink}
-                    className="inline-flex items-center bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 animate-fade-in-delay-3 hover:scale-105 hover:shadow-lg hover:shadow-green-400/40 group"
+                    className="inline-flex items-center bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 animate-fade-in-delay-3 hover:scale-105 hover:shadow-xl shadow-lg group"
                   >
                     {slide.buttonText}
                     <svg
@@ -116,13 +116,13 @@ export function HeroSlider() {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-green-600/30 hover:bg-green-600/50 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-green-400/40"
+        className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-primary-600/30 hover:bg-primary-600/50 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg"
       >
         <ChevronLeft className="w-6 h-6" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-green-600/30 hover:bg-green-600/50 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-green-400/40"
+        className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-primary-600/30 hover:bg-primary-600/50 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg"
       >
         <ChevronRight className="w-6 h-6" />
       </button>
@@ -133,10 +133,10 @@ export function HeroSlider() {
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-500 ${
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
               index === currentSlide
-                ? "bg-green-500 shadow-lg shadow-green-400/50 scale-125"
-                : "bg-white/50 hover:bg-green-300"
+                ? "bg-primary-600 shadow-lg scale-125"
+                : "bg-white/50 hover:bg-primary-300"
             }`}
           />
         ))}

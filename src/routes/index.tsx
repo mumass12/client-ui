@@ -24,6 +24,12 @@ import FAQ from "@/pages/FAQ";
 import { MarketPage } from "@/pages/market/MarketPage";
 import { CatalogPage } from "@/pages/market/CatalogPage";
 import { ProductDetailPage } from "@/pages/market/ProductDetialsPage";
+import UserAccountPage from "@/pages/market/UserAccountPage";
+import CheckoutPage from "@/pages/market/CheckoutPage";
+import WishlistPage from "@/pages/market/WishlistPage";
+import OrderPage from "@/pages/market/OrderPage";
+import PaymentSuccessPage from "@/pages/market/PaymentSuccessPage";
+import CategoriesPage from "@/pages/market/CategoriesPage";
 
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useUser();
@@ -107,19 +113,6 @@ const staffRoutes: RouteObject[] = [
   },
 ];
 
-//checkout route
-const checkoutRoute: RouteObject[] = [
-  {
-    path: "/payment-checkout",
-    element: (
-      <ProtectedRoute>
-        <div>
-          <LoadingOverlay isLoading={true} />
-        </div>
-      </ProtectedRoute>
-    ),
-  },
-];
 
 // Root route
 export const rootRoute: RouteObject = {
@@ -163,6 +156,57 @@ export const ProductDetailsRoute: RouteObject = {
   element: <ProductDetailPage />,
 };
 
+//User Account route
+export const userAccountRoute: RouteObject = {
+  path: "/account",
+  element: (
+    <ProtectedRoute>
+      <UserAccountPage />
+    </ProtectedRoute>
+  ),
+};
+
+//Checkout route
+export const checkoutRoute: RouteObject = {
+  path: "/checkout",
+  element: (
+    <ProtectedRoute>
+      <CheckoutPage />
+    </ProtectedRoute>
+  ),
+};
+
+//Wishlist route
+export const wishlistRoute: RouteObject = {
+  path: "/wishlist",
+  element: <WishlistPage />,
+};
+
+//Order Details route
+export const orderDetailsRoute: RouteObject = {
+  path: "/order/:orderId",
+  element: (
+    <ProtectedRoute>
+      <OrderPage />
+    </ProtectedRoute>
+  ),
+};
+
+//Payment Success route
+export const paymentSuccessRoute: RouteObject = {
+  path: "/payment-success",
+  element: (
+    <ProtectedRoute>
+      <PaymentSuccessPage />
+    </ProtectedRoute>
+  ),
+};
+
+//Categories route
+export const categoriesRoute: RouteObject = {
+  path: "/categories",
+  element: <CategoriesPage />,
+};
 //events route
 export const eventsRoute: RouteObject = {
   path: "/events",
@@ -236,6 +280,12 @@ const routes: RouteObject[] = [
   marketPlaceRoute,
   catalogPageRoute,
   ProductDetailsRoute,
+  userAccountRoute,
+  checkoutRoute,
+  wishlistRoute,
+  orderDetailsRoute,
+  paymentSuccessRoute,
+  categoriesRoute,
   eventsRoute,
   eventDetailsRoute,
   registerRoute,
@@ -248,7 +298,6 @@ const routes: RouteObject[] = [
   ...bsRoutes,
   ...exhibitorProfileRoute,
   ...attendeeProfileRoute,
-  ...checkoutRoute,
 ];
 
 export default routes;

@@ -34,7 +34,7 @@ export function ProductCard({
   };
 
   return (
-    <div className="group relative bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-strong transition-all duration-500 hover:scale-105 hover:-translate-y-1">
+    <div className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 border border-primary-100">
       <Link to={`/product/${product.id}`} className="block">
         <div className="relative overflow-hidden">
           <img
@@ -44,38 +44,38 @@ export function ProductCard({
           />
           {product.discount && (
             <div className="absolute top-4 left-4 bg-gradient-to-r from-secondary-light to-secondary-dark text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-secondary animate-pulse-gentle">
-              -{product.discount}%
+              -{product.discount}% OFF
             </div>
           )}
 
           {/* Quick Actions Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/0 group-hover:from-black/30 to-transparent transition-all duration-500 flex items-center justify-center">
-            <div className="flex space-x-3 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+            <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
               <button
                 onClick={handleToggleWishlist}
-                className={`p-3 rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm ${
+                className={`p-2 rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm ${
                   isInWishlist
-                    ? "bg-gradient-to-r from-secondary-light to-secondary-dark text-white shadow-secondary"
-                    : "bg-white/90 text-gray-700 hover:bg-secondary-light hover:text-secondary hover:shadow-secondary"
+                    ? "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg"
+                    : "bg-white/90 text-gray-700 hover:bg-red-50 hover:text-red-600"
                 }`}
               >
                 <Heart
-                  className="w-5 h-5"
+                  className="w-4 h-4"
                   fill={isInWishlist ? "currentColor" : "none"}
                 />
               </button>
 
               {showQuickView && (
-                <button className="p-3 bg-white/90 text-gray-700 rounded-full hover:bg-gray-50 transition-all duration-300 hover:scale-110 backdrop-blur-sm hover:shadow-medium">
-                  <Eye className="w-5 h-5" />
+                <button className="p-2 bg-white/90 text-gray-700 rounded-full hover:bg-gray-50 transition-all duration-300 hover:scale-110 backdrop-blur-sm">
+                  <Eye className="w-4 h-4" />
                 </button>
               )}
 
               <button
                 onClick={handleAddToCart}
-                className="p-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-full hover:from-primary-600 hover:to-primary-700 transition-all duration-300 hover:scale-110 shadow-green-glow hover:shadow-strong backdrop-blur-sm"
+                className="p-2 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-full hover:from-primary-700 hover:to-primary-800 transition-all duration-300 hover:scale-110 shadow-lg backdrop-blur-sm"
               >
-                <ShoppingCart className="w-5 h-5" />
+                <ShoppingCart className="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -104,17 +104,17 @@ export function ProductCard({
             {product.name}
           </h3>
 
-          <p className="text-sm text-gray-500 mb-3 font-medium">
+          <p className="text-sm text-primary-500 mb-3 font-medium">
             {product.brand}
           </p>
 
           <div className="flex items-center space-x-3">
-            <span className="text-xl font-bold text-gray-900">
-              ${product.price}
+            <span className="text-xl font-bold text-primary-900">
+              ₦{(product.price * 1500).toLocaleString()}
             </span>
             {product.originalPrice && (
               <span className="text-base text-gray-500 line-through">
-                ${product.originalPrice}
+                ₦{(product.originalPrice * 1500).toLocaleString()}
               </span>
             )}
           </div>

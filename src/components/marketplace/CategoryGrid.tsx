@@ -4,13 +4,13 @@ import { categories } from "../../data/products";
 
 export function CategoryGrid() {
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section className="py-20 bg-gradient-to-b from-primary-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-6 animate-slide-up">
+          <h2 className="text-4xl font-bold text-primary-900 mb-6 animate-slide-up">
             Shop by Category
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto animate-slide-up">
+          <p className="text-lg text-primary-600 max-w-2xl mx-auto animate-slide-up">
             Explore our diverse collection of products across different
             categories, each carefully curated to meet your lifestyle needs.
           </p>
@@ -21,7 +21,7 @@ export function CategoryGrid() {
             <Link
               key={category.id}
               to={`/catalog?category=${category.name}`}
-              className="group relative overflow-hidden rounded-2xl bg-white shadow-soft hover:shadow-strong transition-all duration-500 hover:scale-105 hover:-translate-y-2"
+              className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 border border-primary-100"
             >
               <div className="aspect-square overflow-hidden relative">
                 <img
@@ -33,13 +33,13 @@ export function CategoryGrid() {
               </div>
 
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-xl font-bold mb-2 group-hover:text-primary-200 transition-colors duration-300">
+                <h3 className="text-xl font-bold mb-2 group-hover:text-primary-300 transition-colors duration-300">
                   {category.name}
                 </h3>
-                <p className="text-sm text-gray-200 mb-4 group-hover:text-primary-100 transition-colors duration-300">
+                <p className="text-sm text-primary-200 mb-4 group-hover:text-primary-100 transition-colors duration-300">
                   {category.productCount} products
                 </p>
-                <div className="flex items-center text-sm font-semibold group-hover:text-primary-300 transition-all duration-300">
+                <div className="flex items-center text-sm font-semibold group-hover:text-primary-200 transition-all duration-300">
                   Shop Now
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                 </div>
